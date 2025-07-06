@@ -1,13 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="shadow-md">
-      <div className="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto ">
-        <div className="flex items-center">
+    <header className="shadow-md">
+      <div className="flex justify-between items-center px-4 py-4 sm:px-8  max-w-7xl mx-auto ">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
           <p className="text-2xl font-bold text-primary">LestaBnb</p>
-        </div>
-        <div className="flex items-center border border-gray-300 rounded-full px-6 py-2">
+        </Link>
+        {/* Search Bar */}
+        <Link
+          to="/"
+          className="hidden lg:flex items-center border border-gray-300 rounded-full px-6 py-2"
+        >
           <p className="pr-4 border-r border-r-gray-300 cursor-pointer">
             Qualquer lugar
           </p>
@@ -31,8 +37,12 @@ const Header = () => {
               />
             </svg>
           </div>
-        </div>
-        <div className="flex items-center gap-2 border border-gray-300 rounded-full px-6 py-2">
+        </Link>
+        {/* User Profile */}
+        <Link
+          to="/login"
+          className="flex items-center gap-2 border border-gray-300 rounded-full px-6 py-2"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -63,10 +73,10 @@ const Header = () => {
             />
           </svg>
 
-          <p>João vitor</p>
-        </div>
+          <p className="sm:max-w-none max-w-25 truncate">João vitor</p>
+        </Link>
       </div>
-    </div>
+    </header>
   );
 };
 
