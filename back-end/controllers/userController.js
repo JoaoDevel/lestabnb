@@ -3,12 +3,30 @@ import bcrypt from "bcrypt"
 
 
 const login = async (req, res)=> {
-    /* Buscando todos os usuários no banco de dados */
+    const {email, password} = req.body
+
+        /* Buscando um usuário pelo email */
         try{
-            const userDoc = await User.find()
-            res.json(userDoc)
+            const userDoc = await User.findOne({ email })
+            if(!userDoc){
+               return res.json("Usuario não encontrado")
+            }
+
+            const passwordMatch =  bcrypt.compareSync(password, userDoc.password)
+            if(!passwordMatch){
+               return res.json("Senha incorretos")
+            }
+
+            if(passwordMatch){
+                const {name, _id} = userDoc
+                res.json({name, _id, email})
+            }else{
+                res.json("Email ou senha incorretos")
+            }
+            
         }catch(error){
-            res.status(404).json(error)
+            console.log(error)
+            res.status(500).json(error)
         }
 }
 
