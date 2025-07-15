@@ -1,5 +1,7 @@
 import User from "../models/User.js"
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import  dotenv from "dotenv"
 
 
 const login = async (req, res)=> {
@@ -17,9 +19,13 @@ const login = async (req, res)=> {
                return res.json("Senha incorretos")
             }
 
+            const {name, _id} = userDoc
+
             if(passwordMatch){
-                const {name, _id} = userDoc
-                res.json({name, _id, email})
+                
+                const newUserObj = {name, _id, email}
+
+                res.json(newUserObj)
             }else{
                 res.json("Email ou senha incorretos")
             }

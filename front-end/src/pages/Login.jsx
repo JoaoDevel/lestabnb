@@ -13,11 +13,12 @@ const Login = ({ setUser }) => {
 
     if (email && password) {
       try {
-        const { data: userDoc } = await axios.post(
+        const { data } = await axios.post(
           "http://localhost:3000/api/user/login",
           { email, password }
         );
-        setUser(userDoc);
+
+        setUser(data);
         setRedirect(true);
       } catch (error) {
         alert("Deu um erro ao fazer login, verifique suas credenciais!");
